@@ -13,7 +13,7 @@ class Matriz {
         return M;
     }
 
-    public static void exibeMatiz(double[][] M){
+    public static void exibeMatriz(double[][] M){
         int num_linhas = M.length;
         int num_cols = M[0].length;
         for(int i=0;i<num_linhas;i++) {
@@ -22,6 +22,19 @@ class Matriz {
             }
             System.out.println();
         }
+    }
+    public static double[][] matmult (double[][] A, double[][] B) {
+        int num_linhas = A.length;
+        int num_cols = B[0].length;
+        double[][] C = new double[num_linhas][num_cols];
+        for(int i=0;i<num_linhas;i++) {
+            for(int j=0;j<num_cols;j++){
+                for(int k=0;k<B.length; k++) {
+                    C[i][j] += A[i][k] * B[k][j];
+                }
+            }
+        }
+        return C;
     }
     public static void main(String[] args) {
         if (args.length < 4) {
@@ -36,7 +49,10 @@ class Matriz {
         Scanner sc = new Scanner(System.in);
         double[][] A = leMatriz(num_linhas_A, num_cols_A, sc);
         double[][] B = leMatriz(num_linhas_B, num_cols_B, sc);
-        exibeMatiz(A);
-        exibeMatiz(B);
+        exibeMatriz(A);
+        exibeMatriz(B);
+        double [][] C = matmult(A, B);
+        System.out.println("C =");
+        exibeMatriz(C);
     }
 }
