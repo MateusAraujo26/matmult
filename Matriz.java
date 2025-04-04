@@ -18,22 +18,20 @@ class Matriz {
     }
 
     /* Lê e inicializa uma matriz de tamanho num_linhas * num_cols */
-    public static Matriz leMatriz(int num_linhas, int num_cols, Scanner sc) {
-        Matriz M = new Matriz(num_linhas, num_cols);
+    public void leMatriz(Scanner sc) {
         for(int i=0;i<num_linhas;i++) {
             for(int j=0;j<num_cols;j++){
                 double valor = sc.nextDouble();
-                M.valores[i][j] = valor;
+                valores[i][j] = valor;
             }
         }
-        return M;
     }
 
     /* Printa uma matriz M no termial */
-    public static void exibeMatriz(Matriz M){
-        for(int i=0;i<M.num_linhas;i++) {
-            for(int j=0;j<M.num_cols;j++){
-                System.out.print(M.valores[i][j] + " ");
+    public void exibeMatriz(){
+        for(int i=0;i<num_linhas;i++) {
+            for(int j=0;j<num_cols;j++){
+                System.out.print(valores[i][j] + " ");
             }
             System.out.println();
         }
@@ -62,12 +60,14 @@ class Matriz {
         int num_cols_B = Integer.parseInt(args[3]);
 
         Scanner sc = new Scanner(System.in);
-        Matriz A = leMatriz(num_linhas_A, num_cols_A, sc);
-        Matriz B = leMatriz(num_linhas_B, num_cols_B, sc);
-        exibeMatriz(A);
-        exibeMatriz(B);
+        Matriz A = new Matriz(num_linhas_A, num_cols_A);
+        A.leMatriz(sc);
+        Matriz B = new Matriz(num_linhas_B, num_cols_B);
+        B.leMatriz(sc);
+        A.exibeMatriz();
+        B.exibeMatriz();
         Matriz C = matmult(A, B);
         System.out.println("C =");
-        exibeMatriz(C);
+        C.exibeMatriz();
     }
 }
